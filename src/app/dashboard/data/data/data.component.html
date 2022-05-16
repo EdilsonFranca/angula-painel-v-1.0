@@ -1,0 +1,27 @@
+<div>
+  <div style="display: block">
+    <div class="chart-wrapper m-2">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link text-muted active" (click)="getChatBy('year')"   data-bs-toggle="tab"  type="button" role="tab"  aria-selected="true">Último Ano</button>
+          <button class="nav-link text-muted"        (click)="getChatBy('month')"  data-bs-toggle="tab"  type="button" role="tab"  aria-selected="false">Último mês</button>
+          <button class="nav-link text-muted"        (click)="getChatBy('week')"   data-bs-toggle="tab"  type="button" role="tab"  aria-selected="false">Última semana</button>
+          <button class="nav-link text-muted"        (click)="getChatBy('day')"    data-bs-toggle="tab"  type="button" role="tab"  aria-selected="false">Último dia</button>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active p-2"  role="tabpanel" >
+          <canvas baseChart
+                  [datasets]="barChartData"
+                  [colors]="chartColors"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [plugins]="barChartPlugins"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<app-navegate-map>
+  <strong><span class="text-muted">Dashboard</span>
+    <i class="bi bi-chevron-right"></i>
+    <span class="app-primary-color">Adicionais</span></strong>
+</app-navegate-map>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Remover Adicional</h5>
+        <button  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <small>Tem Certeza que deseja Remover o Adicional</small>
+        <strong *ngIf="additional$ as additional ;" > {{ additional.name}}</strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="remove()" >Remover</button>
+      </div>
+    </div>
+  </div>
+</div>
+<ul class="list-group">
+  <p class="text-end">
+    <app-btn-new></app-btn-new>
+  </p>
+  <app-additional (remove_additional)="add_additional($event)"  *ngFor="let additional of additional"  [additional]="additional" ></app-additional>
+</ul>

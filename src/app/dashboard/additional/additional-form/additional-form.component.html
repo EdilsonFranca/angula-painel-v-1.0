@@ -1,0 +1,37 @@
+<div class="">
+  <app-navegate-map>
+    <strong><span class="text-muted">Dashboard</span>
+      <i class="bi bi-chevron-right"></i><span class="text-muted">Adicionais</span>
+      <i class="bi bi-chevron-right"></i>
+      <span class="app-primary-color">Criar</span></strong>
+  </app-navegate-map>
+  <app-btn-return [url_return]="'/dashboard/additional'"></app-btn-return>
+  <div>
+    <form [formGroup]="additionalForm" class="d-flex py-4" (submit)="create()">
+      <div class="col-md-6 mx-auto mt-5 p-3 border" style="height: 350px">
+        <div class="mb-3 mx-2">
+          <label for="formName" class="form-label">Nome</label>
+          <input type="text" formControlName="name" class="form-control" id="formName" >
+          <ap-vmessage
+            text="Por favor digite o nome"
+            *ngIf="additionalForm.get('name').errors?.required">
+          </ap-vmessage>
+        </div>
+        <div class="mb-3 mx-2">
+          <label for="formPrice" class="form-label">Preço</label>
+          <input type="text" formControlName="price" class="form-control" id="formPrice" >
+          <ap-vmessage
+            text="Por favor digite o Preço"
+            *ngIf="additionalForm.get('price').errors?.required"
+          >
+          </ap-vmessage>
+        </div>
+
+
+        <button [disabled]="additionalForm.invalid" type="submit" class="mt-2 mx-2 btn btn-primary btn-block">
+          Cadastrar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

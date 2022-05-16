@@ -1,0 +1,31 @@
+<div class="">
+  <app-navegate-map>
+    <strong><span class="text-muted">Dashboard</span>
+      <i class="bi bi-chevron-right"></i><span class="text-muted">Categorias</span>
+      <i class="bi bi-chevron-right"></i>
+      <span class="app-primary-color">Editar</span></strong>
+  </app-navegate-map>
+  <app-btn-return [url_return]="'/dashboard/category'"></app-btn-return>
+  <div class="p-3 d-flex flex-column" style="height: calc(100vh - 130px)">
+    <span class="h4">{{ category.name }}</span>
+    <div class="w-75 m-auto mt-3">
+      <span class="h5 text-muted">Adicionais</span>
+      <form [formGroup]="additionalForm" class="form mt-4" (submit)="edit_category()">
+        <ul *ngFor="let additional of additional" class="list-group ">
+          <li class="list-group-item d-flex justify-content-between mt-2">
+          <span>
+                 <input formArrayName="selectedCountries" [value]="additional.id" type="checkbox"
+                        [checked]="additional.cheked" (change)="onCheckboxChange($event)">
+            {{ additional.name }}
+          </span>
+            <span>{{ additional.price}}</span>
+          </li>
+        </ul>
+      </form>
+
+    </div>
+    <div>
+      <button class="btn btn-primary align-items-end" (click)="edit_category()">Editar</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<div class="">
+  <app-navegate-map>
+    <strong><span class="text-muted">Dashboard</span>
+      <i class="bi bi-chevron-right"></i><span class="text-muted">Produtos</span>
+      <i class="bi bi-chevron-right"></i>
+      <span class="app-primary-color">Editar</span></strong>
+  </app-navegate-map>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Remover Produto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <small>Tem Certeza que deseja Remover o Produto</small> <strong> {{product.name}}</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="remove()">Remover</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-btn-return [url_return]="'/dashboard/product'"></app-btn-return>
+  <div class="">
+
+    <form [formGroup]="productForm" (submit)="upload_edit()" class="d-flex py-4">
+      <div class="col-md-6 text-center " style="max-height: 100%">
+        <input
+          #fileInput
+          hidden
+          formControlName="file"
+          type="file"
+          accept="image/*"
+          (change)="handleFile($event.target.files[0])"
+        >
+
+        <div class="form-group" *ngIf="!preview; else previewImage">
+          <div class="text-center" *ngIf="!product.photo; else photo">
+            <i class="bi bi-image fa-4x align-middle" style="font-size: 200px;color: dimgray" type="button"
+               (click)="fileInput.click()"></i>
+          </div>
+
+          <ng-template #photo>
+            <app-photo [url_photo]="product.photo" (click)="fileInput.click()"></app-photo>
+          </ng-template>
+        </div>
+
+        <ng-template #previewImage>
+          <div class="text-center" *ngIf="preview; else photo">
+            <app-photo (click)="fileInput.click()" [url_photo]="preview"></app-photo>
+          </div>
+        </ng-template>
+
+        <ng-template #photo>
+          <div>
+            <app-photo (click)="fileInput.click()" [url_photo]="product.photo"></app-photo>
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="col-md-6 p-3">
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+            <label for="formName" class="form-label text-muted">Nome</label>
+            <ap-vmessage
+              text="o campo Nome é obrigatório"
+              *ngIf="productForm.get('name').errors?.required && !product.name">
+            </ap-vmessage>
+          </div>
+          <input type="hidden" formControlName="id" [(ngModel)]="product.id">
+          <input type="text" formControlName="name" [(ngModel)]="product.name" class="form-control" id="formName">
+
+        </div>
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+          <label for="formPrice" class="form-label text-muted">Preço</label>
+            <ap-vmessage
+            text="o campo Preço é obrigatório"
+            *ngIf="productForm.get('price').errors?.required && !product.price">
+           </ap-vmessage>
+          </div>
+          <input type="text" formControlName="price" class="form-control" [(ngModel)]="product.price" id="formPrice">
+        </div>
+
+        <div class="mb-3">
+          <label for="formPromotion" class="form-label text-muted">Preço Promocional</label>
+          <input type="text" formControlName="price_promotion" [(ngModel)]="product.price_promotion" class="form-control" id="formPromotion">
+        </div>
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+            <label for="formCategory" class="form-label text-muted">Categoria</label>
+            <ap-vmessage
+              text="o campo Categoria é obrigatório"
+              *ngIf="productForm.get('category_id').errors?.required && !product.category_id">
+            </ap-vmessage>
+          </div>
+          <select formControlName="category_id"  [(ngModel)]="product.category_id"  class="form-control" id="formCategory">
+            <option  value="{{ category.id }}" *ngFor="let category of categories">{{ category.name }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div class="d-flex justify-content-between">
+            <label for="formDescription" class="form-label text-muted">Descrição</label>
+            <ap-vmessage
+              text="Max length is 100"
+              *ngIf="productForm.get('description').errors?.maxlength && !product.description">
+            </ap-vmessage>
+          </div>
+          <textarea
+            id="formDescription"
+            [(ngModel)]="product.description"
+            formControlName="description"
+            class="form-control form-control-sm">
+            </textarea>
+        </div>
+
+        <div class="my-3 d-flex">
+          <button class="btn btn-primary  col btn-sm me-3" type="submit"><i class="bi bi-pencil"></i> Editar</button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                  class="btn btn-danger  col btn-sm"><i class="bi bi-trash3"></i> Remover
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

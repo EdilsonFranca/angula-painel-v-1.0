@@ -1,0 +1,9 @@
+ <li class="list-group-item d-flex justify-content-between align-items-center my-2 mx-3">
+   <strong *ngIf="category" class="text-muted">{{ category.name }} </strong>
+   <div>
+     <a class="text-dark text-decoration-none" [routerLink]="[category.id]">
+       <span class="me-2 text-primary"><i class="bi bi-eye"></i> <i class="bi bi-plus"></i></span>
+     </a>|
+     <span (click)="openModal(category)" class=" text-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" > <i class="bi bi-trash3"></i></span>
+   </div>
+ </li>

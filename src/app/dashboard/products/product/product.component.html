@@ -1,0 +1,22 @@
+<div class="card-block">
+  <a class="text-dark text-decoration-none" [routerLink]="[id]">
+    <p class="card-header border-0">{{ name | uppercase }}</p>
+    <i class="bi bi-image m-auto" *ngIf="!photo; else image" style="font-size: 140px;color:dimgray"></i>
+    <div style="width: 200px">
+      <p class="d-flex justify-content-between">
+        <strong class="text-muted">Preço</strong> <span>R$ {{ price }}</span>
+      </p>
+      <p class="d-flex justify-content-between" *ngIf="price_promotion;">
+        <strong class="text-muted"> Promoção</strong> <span>R$ {{ price_promotion }}</span>
+      </p>
+    </div>
+    <p class="text-start">
+    <small>
+      {{ description }}
+    </small>
+  </p>
+  </a>
+</div>
+<ng-template #image>
+  <img class=" w-100" [src]="photo" style="height: 200px">
+</ng-template>

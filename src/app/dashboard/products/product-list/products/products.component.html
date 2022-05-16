@@ -1,0 +1,34 @@
+<app-navegate-map>
+  <strong><span class="text-muted">Dashboard</span>
+    <i class="bi bi-chevron-right"></i>
+    <span class="app-primary-color">Produtos</span></strong>
+</app-navegate-map>
+<div class="" style="overflow-y: scroll; height: 100%;">
+  <p class="text-end">
+    <app-btn-new></app-btn-new>
+  </p>
+  <ul class="list-unstyled" style="overflow-x: hidden">
+    <li *ngFor="let cols of rows" class="row no-gutters p-0">
+      <div *ngFor="let product of cols" class="col-md-4">
+        <app-card>
+          <app-product
+            [name]="product.name"
+            [id]="product.id"
+            [price]="product.price"
+            [photo]="product.photo"
+            [price_promotion]="product.price_promotion"
+            [description]="product.description"
+            [created_at]="product.created_at"
+          >
+          </app-product>
+          <div class="text-center p-1">
+          </div>
+        </app-card>
+      </div>
+    </li>
+    <p class="text-center text-muted" *ngIf="!products.length">
+      Sorry, no product
+    </p>
+  </ul>
+</div>
+

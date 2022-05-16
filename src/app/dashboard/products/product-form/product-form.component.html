@@ -1,0 +1,99 @@
+<div class="">
+  <app-navegate-map>
+    <strong><span class="text-muted">Dashboard</span>
+      <i class="bi bi-chevron-right"></i><span class="text-muted">Produtos</span>
+      <i class="bi bi-chevron-right"></i>
+      <span class="app-primary-color">Criar</span></strong>
+  </app-navegate-map>
+  <app-btn-return [url_return]="'/dashboard/product'"></app-btn-return>
+  <div class="">
+     <form [formGroup]="productForm" class="d-flex py-4" (submit)="upload()">
+      <div class="col-md-6 text-center">
+        <div class="form-group" *ngIf="!preview; else previewImage">
+          <i class="bi bi-image fa-4x align-middle"  style="font-size: 200px;color: dimgray" type="button"  (click)="fileInput.click()"></i>
+          <input
+            #fileInput
+            hidden
+            formControlName="file"
+            type="file"
+            accept="image/*"
+            (change)="handleFile($event.target.files[0])"
+          >
+
+          <ap-vmessage
+            text="Por favor selecione a foto"
+            *ngIf="productForm.get('file').errors?.required"
+          >
+          </ap-vmessage>
+        </div>
+        <ng-template #previewImage>
+          <div class="text-center">
+            <app-photo [url_photo]="preview"  ></app-photo>
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="col-md-6 p-3">
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+            <label for="formName"  class="form-label text-muted">Nome</label>
+            <ap-vmessage
+              text="o campo Nome é obrigatório"
+              *ngIf="productForm.get('name').errors?.required"
+            >
+            </ap-vmessage>
+          </div>
+          <input type="text" formControlName="name" class="form-control" id="formName" >
+        </div>
+
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+            <label for="formPrice" class="form-label text-muted">Preço</label>
+            <ap-vmessage
+              text="o campo Preço é obrigatório"
+              *ngIf="productForm.get('price').errors?.required">
+            </ap-vmessage>
+          </div>
+          <input type="text" formControlName="price" class="form-control" id="formPrice" >
+        </div>
+
+        <div class="mb-3">
+          <label for="formPromotion" class="form-label text-muted">Preço Promocional</label>
+          <input type="text" formControlName="price_promotion" class="form-control" id="formPromotion" >
+        </div>
+
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+             <label for="formCategory" class="form-label text-muted">Categoria</label>
+            <ap-vmessage
+              text="o campo Categoria é obrigatório"
+              *ngIf="productForm.get('category_id').errors?.required">
+            </ap-vmessage>
+          </div>
+          <select formControlName="category_id"   class="form-control" id="formCategory">
+            <option value="{{ category.id }}" *ngFor="let category of categories">{{ category.name }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div class="d-flex justify-content-between">
+            <label for="formDescription" class="form-label text-muted">Descrição</label>
+            <ap-vmessage
+              text="Max length is 100"
+              *ngIf="productForm.get('description').errors?.maxlength">
+            </ap-vmessage>
+          </div>
+          <textarea
+            id="formDescription"
+            formControlName="description"
+            class="form-control form-control-sm">
+        </textarea>
+        </div>
+        <button [disabled]="productForm.invalid" type="submit" class="mt-2 btn btn-primary btn-block">
+          Cadastrar
+        </button>
+
+      </div>
+    </form>
+  </div>
+</div>

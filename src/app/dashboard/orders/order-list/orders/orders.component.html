@@ -1,0 +1,10 @@
+<app-navegate-map>
+  <strong><span class="text-muted">Dashboard</span>
+    <i class="bi bi-chevron-right"></i>
+    <span class="app-primary-color">Pedidos</span></strong>
+</app-navegate-map>
+<div class="" style="overflow-y: scroll; height: 100%;">
+<ul class="list-group" style="overflow-x: hidden">
+     <app-order *ngFor="let order of orders"  [order]="order" ></app-order>
+</ul>
+</div>
